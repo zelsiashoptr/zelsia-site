@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Zelsia – 3D Baskı & STL Tasarım</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Zelsia 3D baskı figürler, özel tasarımlar ve 3D yazıcılar için STL dosyaları. Hayal et, Zelsia bassın.">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #0f172a;
+      color: #e5e7eb;
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(10px);
+      background: rgba(15, 23, 42, 0.9);
+      border-bottom: 1px solid #1f2937;
+    }
+    .container {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+    }
+    .logo {
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .logo span.circle {
+      width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #f97316, #ea580c 50%, #7c2d12);
+    }
+    .nav-links {
+      display: flex;
+      gap: 16px;
+      font-size: 14px;
+    }
+    .nav-links a {
+      padding: 6px 10px;
+      border-radius: 999px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-links a:hover {
+      background: #1f2937;
+      color: #f97316;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 40px 0 32px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 32px;
+      align-items: center;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #111827;
+      border: 1px solid #1f2937;
+      font-size: 12px;
+      margin-bottom: 12px;
+    }
+    .hero-badge span.dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+    }
+    .hero h1 {
+      font-size: 32px;
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+    .hero h1 span.accent {
+      background: linear-gradient(90deg, #f97316, #eab308);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .hero p {
+      font-size: 15px;
+      color: #9ca3af;
+      margin-bottom: 16px;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .btn {
+      border-radius: 999px;
+      padding: 9px 18px;
+      font-size: 14px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.1s;
+    }
+    .btn-primary {
+      background: linear-gradient(90deg, #f97316, #fb923c);
+      color: #111827;
+      font-weight: 600;
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.05);
+    }
+    .btn-ghost {
+      background: transparent;
+      color: #e5e7eb;
+      border-color: #374151;
+    }
+    .btn-ghost:hover {
+      background: #111827;
+      border-color: #4b5563;
+    }
+    .hero-meta {
+      font-size: 12px;
+      color: #6b7280;
+    }
+    .hero-meta strong {
+      color: #e5e7eb;
+    }
+    .hero-visual {
+      position: relative;
+      border-radius: 24px;
+      padding: 18px;
+      background: radial-gradient(circle at 0 0, #f97316 0, #111827 40%);
+      box-shadow: 0 25px 60px rgba(0,0,0,0.8);
+      overflow: hidden;
+    }
+    .hero-visual-inner {
+      border-radius: 18px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid #1f2937;
+      padding: 16px;
+      position: relative;
+    }
+    .chip {
+      font-size: 11px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px solid #4b5563;
+      color: #9ca3af;
+    }
+    .chip-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .mock-figures {
+      margin-top: 6px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+    }
+    .mock-card {
+      border-radius: 10px;
+      background: #020617;
+      border: 1px solid #1f2937;
+      padding: 7px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .mock-figure {
+      height: 46px;
+      border-radius: 10px;
+      background: radial-gradient(circle at 30% 10%, #f97316, #111827 55%);
+    }
+    .mock-name {
+      font-size: 10px;
+      color: #e5e7eb;
+    }
+    .mock-tag {
+      font-size: 9px;
+      color: #9ca3af;
+    }
+
+    main {
+      padding-bottom: 40px;
+    }
+    section {
+      padding: 24px 0;
+      border-top: 1px solid #111827;
+    }
+    section h2 {
+      font-size: 20px;
+      margin-bottom: 6px;
+    }
+    section p.section-desc {
+      font-size: 13px;
+      color: #9ca3af;
+      margin-bottom: 16px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 16px;
+    }
+    @media (min-width: 720px) {
+      .grid-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      .grid-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+    @media (max-width: 799px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .hero-visual {
+        order: -1;
+      }
+      .nav-links { display: none; }
+    }
+
+    .card {
+      border-radius: 16px;
+      border: 1px solid #1f2937;
+      background: radial-gradient(circle at top, rgba(249,115,22,0.06), #020617);
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .card h3 {
+      font-size: 15px;
+    }
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      font-size: 11px;
+    }
+    .pill {
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid #374151;
+      color: #9ca3af;
+    }
+    .card-footer {
+      font-size: 11px;
+      color: #9ca3af;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .card-footer strong {
+      color: #e5e7eb;
+    }
+    .badge {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(34,197,94,0.1);
+      border: 1px solid rgba(34,197,94,0.4);
+      color: #bbf7d0;
+    }
+
+    footer {
+      border-top: 1px solid #111827;
+      padding: 16px 0 24px;
+      font-size: 12px;
+      color: #6b7280;
+    }
+    footer a {
+      color: #9ca3af;
+    }
+    .footer-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+    }
+    .footer-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav class="nav">
+        <div class="logo">
+          <span class="circle"></span>
+          ZELSIA
+        </div>
+        <div class="nav-links">
+          <a href="#urunler">Ürünler</a>
+          <a href="#stl">STL Dosyaları</a>
+          <a href="#kisiye-ozel">Kişiye Özel</a>
+          <a href="#iletisim">İletişim</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- HERO -->
+    <section class="hero">
+      <div>
+        <div class="hero-badge">
+          <span class="dot"></span>
+          <span>3D Baskı Figür & STL – Türkiye</span>
+        </div>
+        <h1>
+          Hayal Et, <span class="accent">Zelsia</span> Bassın.
+        </h1>
+        <p>
+          Koleksiyonluk pop tarzı figürler, araç modelleri ve 3D yazıcılar için STL dosyaları.
+          İster hazır baskı sipariş et, ister kendi yazıcında basmak için dosyayı indir.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#urunler">
+            3D Baskı Ürünler
+          </a>
+          <a class="btn btn-ghost" href="#stl">
+            STL Dosyaları
+          </a>
+        </div>
+        <p class="hero-meta">
+          <strong>Kişiye özel tasarım</strong> istekleri için aşağı kaydır veya
+          <a href="#kisiye-ozel" style="text-decoration: underline;">formu doldur</a>.
+        </p>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-visual-inner">
+          <div class="chip-row">
+            <span class="chip">Zelsia 3D Atölye</span>
+            <span class="chip">Boyasız baskı • Koleksiyon</span>
+          </div>
+          <div class="mock-figures">
+            <div class="mock-card">
+              <div class="mock-figure"></div>
+              <div class="mock-name">Pop tarzı figür</div>
+              <div class="mock-tag">10 cm • PLA</div>
+            </div>
+            <div class="mock-card">
+              <div class="mock-figure"></div>
+              <div class="mock-name">Araç modeli</div>
+              <div class="mock-tag">Detaylı gövde</div>
+            </div>
+            <div class="mock-card">
+              <div class="mock-figure"></div>
+              <div class="mock-name">STL paket</div>
+              <div class="mock-tag">3D yazıcıya hazır</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ÜRÜNLER -->
+    <section id="urunler">
+      <h2>3D Baskı Ürünler</h2>
+      <p class="section-desc">
+        Boyasız 3D baskı figürler, mini koleksiyonlar ve dekoratif objeler. Satın alma butonları Shopier’e yönlendirilir.
+      </p>
+      <div class="grid grid-3">
+        <div class="card">
+          <h3>Pop Tarzı Özel Figür</h3>
+          <p>10 cm boyunda, PLA malzeme ile üretilmiş, boyamaya hazır koleksiyon figürü.</p>
+          <div class="pill-row">
+            <span class="pill">10 cm</span>
+            <span class="pill">PLA</span>
+            <span class="pill">Boyasız</span>
+          </div>
+          <div class="card-footer">
+            <span><strong>Fiyat:</strong> Örnek</span>
+            <a class="btn btn-primary" href="https://shopier-linkin-buraya-gireceksin" target="_blank" rel="noopener noreferrer">
+              Shopier’den Satın Al
+            </a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Araç Modeli (3D Baskı)</h3>
+          <p>Detaylı gövde yapısına sahip, masaüstü sergilemeye uygun araç modeli baskısı.</p>
+          <div class="pill-row">
+            <span class="pill">Orta detay</span>
+            <span class="pill">Koleksiyon</span>
+            <span class="pill">Dekor</span>
+          </div>
+          <div class="card-footer">
+            <span><strong>Fiyat:</strong> Örnek</span>
+            <a class="btn btn-primary" href="https://shopier-linkin-buraya-gireceksin" target="_blank" rel="noopener noreferrer">
+              Shopier’den Satın Al
+            </a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Mini Figür Seti</h3>
+          <p>Birden fazla küçük figür içeren, hediye ve koleksiyon için ideal mini set.</p>
+          <div class="pill-row">
+            <span class="pill">Set</span>
+            <span class="pill">Hediye</span>
+            <span class="pill">Koleksiyon</span>
+          </div>
+          <div class="card-footer">
+            <span><strong>Fiyat:</strong> Örnek</span>
+            <a class="btn btn-primary" href="https://shopier-linkin-buraya-gireceksin" target="_blank" rel="noopener noreferrer">
+              Shopier’den Satın Al
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STL -->
+    <section id="stl">
+      <h2>STL Dosyaları</h2>
+      <p class="section-desc">
+        Kendi 3D yazıcında baskı almak için dijital STL dosyaları. Satın aldıktan sonra indirilebilir link ile teslim edilir.
+      </p>
+      <div class="grid grid-3">
+        <div class="card">
+          <h3>Pop Tarzı Figür – STL</h3>
+          <p>10–15 cm baskıya uygun, destekle basılabilen STL modeli. Kişisel kullanım lisanslı.</p>
+          <div class="pill-row">
+            <span class="pill">STL</span>
+            <span class="pill">Kişisel lisans</span>
+            <span class="pill">FDM uyumlu</span>
+          </div>
+          <div class="card-footer">
+            <span><strong>Fiyat:</strong> Örnek</span>
+            <a class="btn btn-ghost" href="https://shopier-stl-linkin" target="_blank" rel="noopener noreferrer">
+              STL Satın Al
+            </a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Araç Modeli – STL</h3>
+          <p>Tabla dostu ölçekte, parça parça veya tek parça basılabilen araç STL dosyası.</p>
+          <div class="pill-row">
+            <span class="pill">STL</span>
+            <span class="pill">Detaylı model</span>
+            <span class="pill">Ayarlanabilir ölçek</span>
+          </div>
+          <div class="card-footer">
+            <span><strong>Fiyat:</strong> Örnek</span>
+            <a class="btn btn-ghost" href="https://shopier-stl-linkin" target="_blank" rel="noopener noreferrer">
+              STL Satın Al
+            </a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>STL Paket Seti</h3>
+          <p>Birden fazla modeli tek pakette sunan, ekonomik STL koleksiyon seti.</p>
+          <div class="pill-row">
+            <span class="pill">Paket</span>
+            <span class="pill">Çoklu model</span>
+            <span class="pill">Ekonomik</span>
+          </div>
+          <div class="card-footer">
+            <span><strong>Fiyat:</strong> Örnek</span>
+            <a class="btn btn-ghost" href="https://shopier-stl-linkin" target="_blank" rel="noopener noreferrer">
+              STL Satın Al
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Kişiye Özel -->
+    <section id="kisiye-ozel">
+      <h2>Kişiye Özel 3D Figür Tasarımı</h2>
+      <p class="section-desc">
+        Fotoğrafını, motorunu, aracını veya sevdiğin sahneyi 3D figüre dönüştürelim. Aşağıdaki bilgileri doldurup bize mail atman yeterli.
+      </p>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>Nasıl Çalışıyor?</h3>
+          <ol style="font-size: 13px; color: #9ca3af; padding-left: 18px;">
+            <li>Figürünü anlat: kişi, çift, araç, evcil hayvan vs.</li>
+            <li>Birkaç referans fotoğraf gönder.</li>
+            <li>Yaklaşık boyut ve sadece STL mi, baskı mı istediğini belirt.</li>
+            <li>Biz sana fiyat ve süre ile geri dönüş yapalım.</li>
+          </ol>
+          <p style="font-size: 12px; color: #6b7280; margin-top: 8px;">
+            Kişiye özel çalışmalar iade kapsamı dışındadır.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Talep Formatı (Kopyala / Mail At)</h3>
+          <p style="font-size: 12px; color: #9ca3af; margin-bottom: 6px;">
+            Bu metni kopyalayıp mail ile gönderebilirsin:
+          </p>
+          <pre style="background:#020617;border-radius:10px;padding:10px;font-size:11px;white-space:pre-wrap;color:#9ca3af;">
+Merhaba Zelsia,
+Kişiye özel 3D figür yaptırmak istiyorum.
+
+İsim:
+İstediğim figür tipi: (Kişi / Çift / Araç / Evcil hayvan / Diğer)
+Tercih: (Sadece STL / 3D baskı / Her ikisi)
+Yaklaşık boyut:
+Kısaca figür tarifi:
+Fotoğraf link(leri):
+
+Teşekkürler.
+          </pre>
+          <p style="font-size: 12px; margin-top: 6px;">
+            Mail: <a href="mailto:info@zelsia.com.tr">info@zelsia.com.tr</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hakkımızda / İletişim -->
+    <section id="iletisim">
+      <h2>Hakkımızda & İletişim</h2>
+      <p class="section-desc">
+        Zelsia, 3D baskı teknolojisi ile hayal ettiğiniz figürleri, araç modellerini ve koleksiyon parçalarını gerçeğe dönüştüren küçük ama iddialı bir atölyedir.
+      </p>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>Kısaca Zelsia</h3>
+          <p style="font-size: 13px; color: #9ca3af;">
+            3D yazıcılarımız ile hem koleksiyonluk figürler üretiyor, hem de 3D yazıcısı olanlar için STL dosyaları sunuyoruz.
+            Her baskı öncesi model üzerinde ve dilimleme ayarlarında özenle çalışıyoruz.
+          </p>
+          <p style="font-size: 13px; color: #9ca3af; margin-top: 8px;">
+            Hedefimiz; özgün tasarımlar, temiz baskı kalitesi ve güvenilir teslimat ile 3D baskı alanında akla gelen ilk atölyelerden biri olmak.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Bize Ulaş</h3>
+          <p style="font-size: 13px; color: #9ca3af;">
+            📧 E-posta: <a href="mailto:info@zelsia.com.tr">info@zelsia.com.tr</a><br />
+            📸 Instagram: <a href="https://instagram.com/zelsiashoptr" target="_blank" rel="noopener noreferrer">@zelsiashoptr</a><br />
+            🛒 Shopier: <a href="#" target="_blank" rel="noopener noreferrer">Shopier mağazamız</a><br />
+            🎒 Dolap: <a href="#" target="_blank" rel="noopener noreferrer">Dolap profilimiz</a>
+          </p>
+          <p style="font-size: 11px; color: #6b7280; margin-top: 8px;">
+            Shopier ve Dolap linklerini burada güncelleyebilirsin. Böylece Google’dan gelen herkes seni tek merkezden bulur.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-row">
+      <div>Zelsia © <span id="year"></span> – 3D Baskı & STL Tasarım</div>
+      <div class="footer-links">
+        <a href="#urunler">Ürünler</a>
+        <a href="#stl">STL</a>
+        <a href="#kisiye-ozel">Kişiye Özel</a>
+        <a href="#iletisim">İletişim</a>
+      </div>
+    </div>
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </footer>
+</body>
+</html>
+
