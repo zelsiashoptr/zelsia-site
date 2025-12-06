@@ -6,8 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Zelsia 3D baskı figürler, özel tasarımlar ve 3D yazıcılar için STL dosyaları. Hayal et, Zelsia bassın.">
 
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9897037016100908" crossorigin="anonymous"></script>
-  
+  <!-- Google AdSense kodu -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9897037016100908"
+    crossorigin="anonymous"></script>
+
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -149,61 +151,23 @@
     .hero-meta strong {
       color: #e5e7eb;
     }
+
+    /* HERO IMAGE */
     .hero-visual {
       position: relative;
       border-radius: 24px;
-      padding: 18px;
+      padding: 0;
       background: radial-gradient(circle at 0 0, #f97316 0, #111827 40%);
       box-shadow: 0 25px 60px rgba(0,0,0,0.8);
       overflow: hidden;
     }
-    .hero-visual-inner {
-      border-radius: 18px;
-      background: rgba(15, 23, 42, 0.9);
+    .hero-image {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 24px;
       border: 1px solid #1f2937;
-      padding: 16px;
-      position: relative;
-    }
-    .chip {
-      font-size: 11px;
-      padding: 4px 9px;
-      border-radius: 999px;
-      border: 1px solid #4b5563;
-      color: #9ca3af;
-    }
-    .chip-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-    }
-    .mock-figures {
-      margin-top: 6px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 6px;
-    }
-    .mock-card {
-      border-radius: 10px;
-      background: #020617;
-      border: 1px solid #1f2937;
-      padding: 7px;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-    .mock-figure {
-      height: 46px;
-      border-radius: 10px;
-      background: radial-gradient(circle at 30% 10%, #f97316, #111827 55%);
-    }
-    .mock-name {
-      font-size: 10px;
-      color: #e5e7eb;
-    }
-    .mock-tag {
-      font-size: 9px;
-      color: #9ca3af;
     }
 
     main {
@@ -275,6 +239,8 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
     }
     .card-footer strong {
       color: #e5e7eb;
@@ -286,6 +252,27 @@
       background: rgba(34,197,94,0.1);
       border: 1px solid rgba(34,197,94,0.4);
       color: #bbf7d0;
+    }
+
+    /* PRODUCT / GALLERY IMAGES */
+    .product-image {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 8px;
+      object-fit: cover;
+      max-height: 260px;
+    }
+    .gallery-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 6px;
+      margin-top: 6px;
+    }
+    .gallery-image {
+      width: 100%;
+      border-radius: 10px;
+      object-fit: cover;
+      max-height: 190px;
     }
 
     footer {
@@ -358,29 +345,8 @@
         </p>
       </div>
       <div class="hero-visual">
-        <div class="hero-visual-inner">
-          <div class="chip-row">
-            <span class="chip">Zelsia 3D Atölye</span>
-            <span class="chip">Boyasız baskı • Koleksiyon</span>
-          </div>
-          <div class="mock-figures">
-            <div class="mock-card">
-              <div class="mock-figure"></div>
-              <div class="mock-name">Pop tarzı figür</div>
-              <div class="mock-tag">10 cm • PLA</div>
-            </div>
-            <div class="mock-card">
-              <div class="mock-figure"></div>
-              <div class="mock-name">Araç modeli</div>
-              <div class="mock-tag">Detaylı gövde</div>
-            </div>
-            <div class="mock-card">
-              <div class="mock-figure"></div>
-              <div class="mock-name">STL paket</div>
-              <div class="mock-tag">3D yazıcıya hazır</div>
-            </div>
-          </div>
-        </div>
+        <!-- Hero görseli: fiyonk tokalı AI pop -->
+        <img src="ai-bow-pop.jpg" alt="Zelsia 3D baskı pop tarzı figür" class="hero-image">
       </div>
     </section>
 
@@ -391,50 +357,65 @@
         Boyasız 3D baskı figürler, mini koleksiyonlar ve dekoratif objeler. Satın alma butonları Shopier’e yönlendirilir.
       </p>
       <div class="grid grid-3">
+        <!-- POP FİGÜR ÜRÜN KARTI -->
         <div class="card">
-          <h3>Pop Tarzı Özel Figür</h3>
-          <p>10 cm boyunda, PLA malzeme ile üretilmiş, boyamaya hazır koleksiyon figürü.</p>
+          <!-- Üstte AI konsept görseli -->
+          <img src="ai-hat-pop.jpg" alt="Şapkalı pop tarzı figür AI tasarım" class="product-image">
+          <h3>Pop Tarzı Özel Figür (Lady Tarz)</h3>
+          <p>AI tasarım üzerinden modellenmiş, 3D baskı ile üretilip elle boyanan koleksiyon figürü.</p>
           <div class="pill-row">
-            <span class="pill">10 cm</span>
+            <span class="pill">Yaklaşık 10 cm</span>
             <span class="pill">PLA</span>
-            <span class="pill">Boyasız</span>
+            <span class="pill">Elle boyalı</span>
           </div>
+
+          <!-- Gerçek baskıdan fotoğraf galerisi -->
+          <div class="gallery-row">
+            <img src="print-hat-front.jpg" alt="Şapkalı figür önden gerçek baskı" class="gallery-image">
+            <img src="print-hat-back.jpg" alt="Şapkalı figür arkadan gerçek baskı" class="gallery-image">
+          </div>
+          <div class="gallery-row">
+            <img src="print-mic-front.jpg" alt="Mikrofonlu figür önden gerçek baskı" class="gallery-image">
+            <img src="print-mic-back.jpg" alt="Mikrofonlu figür arkadan gerçek baskı" class="gallery-image">
+          </div>
+
           <div class="card-footer">
-            <span><strong>Fiyat:</strong> Örnek</span>
+            <span><strong>Fiyat:</strong> Örnek (Shopier’de)</span>
             <a class="btn btn-primary" href="https://shopier-linkin-buraya-gireceksin" target="_blank" rel="noopener noreferrer">
               Shopier’den Satın Al
             </a>
           </div>
         </div>
 
+        <!-- Araç modeli ve diğer ürünler: şimdilik görselsiz, sonra dolduracağız -->
         <div class="card">
           <h3>Araç Modeli (3D Baskı)</h3>
-          <p>Detaylı gövde yapısına sahip, masaüstü sergilemeye uygun araç modeli baskısı.</p>
+          <p>Detaylı gövde yapısına sahip, masaüstü sergilemeye uygun araç modeli baskısı. (Görseller ve detaylar eklenecek.)</p>
           <div class="pill-row">
             <span class="pill">Orta detay</span>
             <span class="pill">Koleksiyon</span>
             <span class="pill">Dekor</span>
           </div>
           <div class="card-footer">
-            <span><strong>Fiyat:</strong> Örnek</span>
-            <a class="btn btn-primary" href="https://shopier-linkin-buraya-gireceksin" target="_blank" rel="noopener noreferrer">
-              Shopier’den Satın Al
+            <span><strong>Fiyat:</strong> Yakında</span>
+            <a class="btn btn-primary" href="#" target="_blank" rel="noopener noreferrer">
+              Yakında
             </a>
           </div>
         </div>
 
         <div class="card">
           <h3>Mini Figür Seti</h3>
-          <p>Birden fazla küçük figür içeren, hediye ve koleksiyon için ideal mini set.</p>
+          <p>Birden fazla küçük figür içeren, hediye ve koleksiyon için ideal mini set. (Adventure Time ve diğerleri buraya eklenecek.)</p>
           <div class="pill-row">
             <span class="pill">Set</span>
             <span class="pill">Hediye</span>
             <span class="pill">Koleksiyon</span>
           </div>
           <div class="card-footer">
-            <span><strong>Fiyat:</strong> Örnek</span>
-            <a class="btn btn-primary" href="https://shopier-linkin-buraya-gireceksin" target="_blank" rel="noopener noreferrer">
-              Shopier’den Satın Al
+            <span><strong>Fiyat:</strong> Yakında</span>
+            <a class="btn btn-primary" href="#" target="_blank" rel="noopener noreferrer">
+              Yakında
             </a>
           </div>
         </div>
@@ -449,6 +430,8 @@
       </p>
       <div class="grid grid-3">
         <div class="card">
+          <!-- Mikrofonlu AI görseli -->
+          <img src="ai-mic-pop.jpg" alt="Pop tarzı figür STL AI tasarım" class="product-image">
           <h3>Pop Tarzı Figür – STL</h3>
           <p>10–15 cm baskıya uygun, destekle basılabilen STL modeli. Kişisel kullanım lisanslı.</p>
           <div class="pill-row">
@@ -466,7 +449,7 @@
 
         <div class="card">
           <h3>Araç Modeli – STL</h3>
-          <p>Tabla dostu ölçekte, parça parça veya tek parça basılabilen araç STL dosyası.</p>
+          <p>Tabla dostu ölçekte, parça parça veya tek parça basılabilen araç STL dosyası. (Görseller eklenecek.)</p>
           <div class="pill-row">
             <span class="pill">STL</span>
             <span class="pill">Detaylı model</span>
@@ -482,7 +465,7 @@
 
         <div class="card">
           <h3>STL Paket Seti</h3>
-          <p>Birden fazla modeli tek pakette sunan, ekonomik STL koleksiyon seti.</p>
+          <p>Birden fazla modeli tek pakette sunan, ekonomik STL koleksiyon seti. (Adventure Time ve diğer setler buraya.)</p>
           <div class="pill-row">
             <span class="pill">Paket</span>
             <span class="pill">Çoklu model</span>
@@ -591,4 +574,3 @@ Teşekkürler.
   </footer>
 </body>
 </html>
-
