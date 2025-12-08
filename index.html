@@ -296,16 +296,34 @@
       gap: 10px;
       flex-wrap: wrap;
     }
+    .site-logo {
+  height: 32px; 
+  width: auto;
+    }
+    .logo-text {
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  font-size: 18px;
+    }
+
+    .logo {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Görsel ile yazı arasındaki boşluk */
+    }
+
   </style>
 </head>
 <body>
   <header>
     <div class="container">
       <nav class="nav">
+        
         <div class="logo">
-          <span class="circle"></span>
-          ZELSIA
+  <img src="logo.png" alt="Zelsia Logo" class="site-logo">
+  <span class="logo-text">ZELSIA</span>
         </div>
+        
         <div class="nav-links">
           <a href="#urunler">Ürünler</a>
           <a href="#stl">STL Dosyaları</a>
